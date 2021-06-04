@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "",
+"class": "BubbleEmitter",
+"language": "GDScript",
+"path": "res://src/BubbleEmitter.gd"
+}, {
 "base": "Node2D",
 "class": "Emitter",
 "language": "GDScript",
-"path": "res://Emitter.gd"
+"path": "res://src/Emitter.gd"
 } ]
 _global_script_class_icons={
+"BubbleEmitter": "",
 "Emitter": ""
 }
 
