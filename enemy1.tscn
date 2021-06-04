@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/enemy1_32.png" type="Texture" id=1]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="anglerfish1" type="Area2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.411627, 0.203906 )
+scale = Vector2( 1.02093, 1.01717 )
+polygon = PoolVector2Array( -13.9295, -1.37621, -13.9295, 8.95755, -9.50236, 13.0911, -4.45747, 11.231, 7.17666, 9.57758, 8.89474, 4.05967, 4.1647, 2.06254, -2.39833, -5.09637, -10.5319, -6.95645 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )

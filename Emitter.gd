@@ -1,0 +1,93 @@
+extends Node2D
+class_name Emitter
+
+export(bool) var emitting = true
+export(bool) var local_coords = false
+export(int) var max_particles = 50
+export(Texture) var texture
+export(bool) var texture_randomness = false
+export(float) var lifetime = 1
+export(bool) var lifetime_randomness = true
+export(float) var spread
+export(float) var gravity:float = 0
+export(float, 0, 359, 0.1) var angle = 0
+export(float) var initial_velocity = 0
+export(bool) var initial_velocity_randomness = false
+export(float, 0, 1, 0.01) var damping
+
+var particle_array: = []
+var temp_lifetime:float
+var temp_velocity:float
+
+func _ready():
+  # set seed on this emitter
+  randomize()
+
+func _process(delta):
+  # do something with different texture types, doofus
+  if (texture.get_class() == "AtlasTexture" && texture_randomness):
+    texture = texture as AtlasTexture
+    var region = texture.region
+  var particle_dict = gen_particle()
+  if (particle_dict):
+    particle_array.append(particle_dict)
+  process_particles(delta)
+
+func gen_particle():
+  # if we don't have room / we're not emitting, get outta here
+  if (particle_array.size() >= max_particles || !emitting):
+    return
+  var sprite = Sprite.new()
+  sprite.texture = texture
+  # if we're local, attach to parent and respect parent coords. if we're global, attach to top node and respect top node coords
+  if (local_coords):
+    sprite.position = position
+    add_child(sprite)
+  else:
+    sprite.position = to_global(position)
+    var root = get_tree().get_root()
+    root.add_child(sprite)
+  # determine base values vis a vis randomness
+  if (lifetime_randomness):
+    temp_lifetime = randf() * lifetime
+  else:
+    temp_lifetime = lifetime
+  if (initial_velocity_randomness):
+    temp_velocity = randf() * initial_velocity
+  else:
+    temp_velocity = initial_velocity
+  var particle:Dictionary = {
+    "sprite": sprite,
+    "lifetime": temp_lifetime,
+    "velocity": temp_velocity  * get_parent().scale,
+    "direction": Vector2(cos(angle), sin(angle)),
+    "dx": 0,
+    "dy": 0,
+  }
+  return particle
+
+func process_particles(delta):
+  for particle in particle_array:
+    # if the particle expired last frame, kill it everywhere and move to next item in loop
+    if (particle.lifetime <= 0):
+      particle.sprite.queue_free()
+      particle_array.erase(particle)
+      continue
+    # let's add up all of our dumb vectors yay
+    particle.dy += gravity
+    #get vector from angle
+    var dv = (particle.direction * particle.velocity + Vector2(0, particle.dy)) * delta
+    dv *= (1 - damping)
+    particle.lifetime -= delta
+    particle.sprite.position += dv
+    
+    # bespoke particle processing junk
+    
+    if (particle.sprite.position.y <= -7):
+      particle.sprite.position.y = -8
+      dv *= (1 - damping)
+      var rand = randi() % 10;
+      print(rand)
+      if (rand > 7):
+        particle.sprite.queue_free()
+        particle_array.erase(particle)
