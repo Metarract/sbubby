@@ -7,7 +7,6 @@ func _process(delta):
 
 func process_bubbles(delta):
   for particle in particle_array:
-    print(particle.sprite.position.y)
     if (particle.sprite.position.y <= -7):
       particle.sprite.position.y = -8
       dv *= (1 - damping)

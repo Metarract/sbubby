@@ -9,12 +9,14 @@ export(Texture) var texture:Texture
 export(bool) var texture_randomness = false
 export(float) var lifetime = 1
 export(bool) var lifetime_randomness = true
-export(float) var spread
+export(float) var spread = 0
 export(float) var gravity:float = 0
 export(float, 0, 359, 0.1) var angle = 0
 export(float) var initial_velocity = 0
 export(bool) var initial_velocity_randomness = false
-export(float, 0, 1, 0.01) var damping
+export(float, 0, 1, 0.01) var damping = 0
+export(int) var particle_z_index = 0
+export(bool) var particle_z_index_as_relative = true
 
 var particle_array: = []
 var temp_lifetime:float
@@ -42,6 +44,8 @@ func gen_particle():
     return
   var sprite = Sprite.new()
   sprite.texture = texture
+  sprite.z_as_relative = particle_z_index_as_relative
+  sprite.z_index = particle_z_index
   # if we're local, attach to parent and respect parent coords. if we're global, attach to top node and respect top node coords
   if (local_coords):
     sprite.position = position
@@ -50,8 +54,11 @@ func gen_particle():
     sprite.position = to_global(position)
     var root = get_tree().get_root()
     root.add_child(sprite)
-    # TODO: generate randomness with init position based on given value
   # determine base values vis a vis randomness
+  if (spread > 0):
+    var spread_angle = randf() * 360
+    sprite.position.x += cos(spread_angle) * spread
+    sprite.position.y += sin(spread_angle) * spread
   if (lifetime_randomness):
     temp_lifetime = randf() * lifetime
   else:
@@ -63,7 +70,7 @@ func gen_particle():
   var particle:Dictionary = {
     "sprite": sprite,
     "lifetime": temp_lifetime,
-    "velocity": temp_velocity  * get_parent().scale,
+    "velocity": temp_velocity  * get_parent().scale, # TODO this needs to just get the sign
     "direction": Vector2(cos(angle), sin(angle)),
     "dx": 0,
     "dy": 0,
@@ -80,7 +87,7 @@ func process_particles(delta):
       continue
     # let's add up all of our dumb vectors yay
     particle.dy += gravity
-    #get vector from angle
+    # get vector from angle
     dv = (particle.direction * particle.velocity + Vector2(0, particle.dy)) * delta
     dv *= (1 - damping)
     particle.lifetime -= delta

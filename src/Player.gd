@@ -15,7 +15,7 @@ signal crush_depth_changed(crush_depth)
 
 func _ready():
   $AnimatedSprite.play("init")
-  $AnimatedSprite/Emitter.emitting = false
+  $AnimatedSprite/Bubbles.emitting = false
   emit_signal("depth_changed", depth)
   emit_signal("armor_changed", armor)
   emit_signal("crush_depth_changed", crushDepth)
@@ -50,7 +50,7 @@ func get_movement(delta) -> KinematicCollision2D:
   var dv:Vector2 = Vector2.ZERO
   var airborne = false
   var moving = false
-  $AnimatedSprite/Emitter.emitting = false
+  $AnimatedSprite/Bubbles.emitting = false
   var coeff = 1
   
   if (position.y <= -7):
@@ -59,11 +59,11 @@ func get_movement(delta) -> KinematicCollision2D:
     if Input.is_action_pressed("ui_right"):
       dv.x += accel
       moving = true
-      $AnimatedSprite/Emitter.emitting = true
+      $AnimatedSprite/Bubbles.emitting = true
     if Input.is_action_pressed("ui_left"):
       dv.x -= accel
       moving = true
-      $AnimatedSprite/Emitter.emitting = true
+      $AnimatedSprite/Bubbles.emitting = true
     if Input.is_action_pressed("ui_down"):
       dv.y += accel
       moving = true
