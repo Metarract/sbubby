@@ -1,0 +1,4 @@
+- Typescript in Godot?
+    - https://github.com/GodotExplorer/ECMAScript
+- Particles2d -> replace my dumb script?
+  - ParticleMaterial

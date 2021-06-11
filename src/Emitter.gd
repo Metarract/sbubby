@@ -92,7 +92,7 @@ func process_particles(delta):
     dv = (particle.direction * particle.velocity + Vector2(0, particle.dy)) * delta
     dv *= (1 - damping)
     particle.lifetime -= delta
-    particle.sprite.position += dv
+    particle.sprite.position += dv # TODO node2d.translate?
 
 func kill_particle(particle):
     particle.sprite.queue_free()

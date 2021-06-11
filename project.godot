@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "BaseState",
+"language": "GDScript",
+"path": "res://src/state/BaseState.gd"
+}, {
 "base": "",
 "class": "BubbleEmitter",
 "language": "GDScript",
@@ -18,10 +23,17 @@ _global_script_classes=[ {
 "class": "Emitter",
 "language": "GDScript",
 "path": "res://src/Emitter.gd"
+}, {
+"base": "AnimatedSprite",
+"class": "Weapons",
+"language": "GDScript",
+"path": "res://src/Weapons.gd"
 } ]
 _global_script_class_icons={
+"BaseState": "",
 "BubbleEmitter": "",
-"Emitter": ""
+"Emitter": "",
+"Weapons": ""
 }
 
 [application]
@@ -29,6 +41,11 @@ _global_script_class_icons={
 config/name="LDJ-48"
 run/main_scene="res://MainScene.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameState="*res://src/state/GameState.gd"
+WeaponState="*res://src/state/WeaponState.gd"
 
 [display]
 
@@ -38,6 +55,39 @@ window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[input]
+
+player_fire={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
 
 [rendering]
 

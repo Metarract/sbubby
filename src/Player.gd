@@ -13,17 +13,31 @@ signal depth_changed(depth)
 signal armor_changed(armor)
 signal crush_depth_changed(crush_depth)
 
+var missile = preload("res://Weapons.tscn")
+
+func _input(event):
+  if event.is_action_pressed("player_fire"):
+    var new_missile = missile.instance()
+    new_missile.position = to_global($WeaponInit.position)
+    var root = get_tree().get_root()
+    root.add_child(new_missile)
+    pass
+
 func _ready():
+  print(GameState.state)
   $AnimatedSprite.play("init")
   $AnimatedSprite/Bubbles.emitting = false
   emit_signal("depth_changed", depth)
   emit_signal("armor_changed", armor)
   emit_signal("crush_depth_changed", crushDepth)
 
-func _process(delta):
+func _physics_process(delta):
   var collision = get_movement(delta)
   if (collision):
     handle_collision(collision)
+
+func _process(delta):
+
   # calc depth
   var prevDepth = depth
   depth = int(floor(position.y/10))
@@ -95,7 +109,6 @@ func get_movement(delta) -> KinematicCollision2D:
 func handle_collision(collision):
   v = v.bounce(collision.normal)
   v = v.clamped(maxspeed*0.75)
-  pass
 
 func _on_AnimatedSprite_animation_finished():
   if ($AnimatedSprite.animation == "activate_brights"):
@@ -109,4 +122,3 @@ func _on_AnimatedSprite_frame_changed():
     $Light2D.enabled = true
   if ($AnimatedSprite.animation == "deactivate_brights" && $AnimatedSprite.frame == 2):
     $Light2D.enabled = false
-  pass # Replace with function body.
