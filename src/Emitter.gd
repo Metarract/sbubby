@@ -19,9 +19,6 @@ export(int) var particle_z_index = 0
 export(bool) var particle_z_index_as_relative = true
 
 var particle_array: = []
-var temp_lifetime:float
-var temp_velocity:float
-
 var dv:Vector2 = Vector2(0, 0)
 
 func _ready():
@@ -59,10 +56,14 @@ func gen_particle():
     var spread_angle = randf() * 360
     sprite.position.x += cos(spread_angle) * spread
     sprite.position.y += sin(spread_angle) * spread
+
+  var temp_lifetime:float
   if (lifetime_randomness):
     temp_lifetime = randf() * lifetime
   else:
     temp_lifetime = lifetime
+  
+  var temp_velocity:float
   if (initial_velocity_randomness):
     temp_velocity = randf() * initial_velocity
   else:
