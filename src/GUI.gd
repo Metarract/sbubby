@@ -5,7 +5,7 @@ func _on_Player_depth_changed(depth):
     depth = 0
   $depth.text = "Depth: " + String(depth)
 
-func _on_Player_armor_changed(armor):
+func _on_Player_health_changed(armor):
   if (armor < 0):
     armor = 0
   $armor.text = "Armor: " + String(ceil(armor))

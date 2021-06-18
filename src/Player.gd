@@ -1,43 +1,48 @@
-extends KinematicBody2D
+extends Unit
 
-export var accel = 10
-export var friction = 0.99
-export var maxspeed = 300
-var v:Vector2 = Vector2.ZERO
+var prevHealth = health
 
-var armor = 100
+var airborne = true
+
 var crushDepth = 100
 var depth: int = 0
 
 signal depth_changed(depth)
-signal armor_changed(armor)
+signal health_changed(health)
 signal crush_depth_changed(crush_depth)
 
 var missile = preload("res://Weapons.tscn")
 
-func _input(event):
-  if event.is_action_pressed("player_fire"):
-    var new_missile = missile.instance()
-    new_missile.position = to_global($WeaponInit.position)
-    var root = get_tree().get_root()
-    root.add_child(new_missile)
-    pass
+func _init():
+  maxspeed = 300
+  friction = 0.99
+  speed = 10
 
 func _ready():
   print(GameState.state)
   $AnimatedSprite.play("init")
   $AnimatedSprite/Bubbles.emitting = false
   emit_signal("depth_changed", depth)
-  emit_signal("armor_changed", armor)
+  emit_signal("health_changed", health)
   emit_signal("crush_depth_changed", crushDepth)
+
+func _input(event):
+  if GameState.state == "main":
+    if event.is_action_pressed("player_fire"):
+      var new_missile = missile.instance()
+      new_missile.position = to_global($WeaponInit.position)
+      new_missile.direction = $AnimatedSprite.scale.x
+      var root = get_tree().get_root()
+      root.add_child(new_missile)
+      (get_tree()).set_input_as_handled()
+      pass
 
 func _physics_process(delta):
   var collision = get_movement(delta)
   if (collision):
     handle_collision(collision)
 
-func _process(delta):
-
+func _process(_delta):
   # calc depth
   var prevDepth = depth
   depth = int(floor(position.y/10))
@@ -48,22 +53,21 @@ func _process(delta):
   if ($AnimatedSprite.animation == "brights_on" && depth <= 30):
     $AnimatedSprite.play("deactivate_brights")
 
-  # calc armor and crush depth
-  var prevArmor = armor
-  if (armor < 100):
-    armor = 100
-  if (armor != prevArmor):
-    emit_signal("armor_changed", armor)
+  # calc health and crush depth
+  if (health > 100):
+    health = 100
+  if (health != prevHealth):
+    emit_signal("health_changed", health)
+    prevHealth = health
   var prevCrushDepth = crushDepth
-  crushDepth = armor - fmod(armor, 100)
+  crushDepth = health - fmod(health, 100)
   if (crushDepth != prevCrushDepth):
     emit_signal("crush_depth_changed", crushDepth)
   
 
 func get_movement(delta) -> KinematicCollision2D:
-  var dv:Vector2 = Vector2.ZERO
-  var airborne = false
-  var moving = false
+  airborne = false
+  moving = false
   $AnimatedSprite/Bubbles.emitting = false
   var coeff = 1
   
@@ -71,18 +75,18 @@ func get_movement(delta) -> KinematicCollision2D:
     airborne = true
   if (!airborne):
     if Input.is_action_pressed("ui_right"):
-      dv.x += accel
+      dv.x += speed
       moving = true
       $AnimatedSprite/Bubbles.emitting = true
     if Input.is_action_pressed("ui_left"):
-      dv.x -= accel
+      dv.x -= speed
       moving = true
       $AnimatedSprite/Bubbles.emitting = true
     if Input.is_action_pressed("ui_down"):
-      dv.y += accel
+      dv.y += speed
       moving = true
     if Input.is_action_pressed("ui_up"):
-      dv.y -= accel
+      dv.y -= speed
       moving = true
     # decel a bit faster if we've stopped moving
     if (!moving):
@@ -101,10 +105,9 @@ func get_movement(delta) -> KinematicCollision2D:
     $AnimatedSprite.scale.x = 1
   if v.length() > 0:
     v *= friction * coeff
-  v += dv
-  v = v.clamped(maxspeed)
+  
   # TODO MOVE THIS TO MAIN FUNC
-  return move_and_collide(v * delta)
+  return _move_and_collide(delta)
 
 func handle_collision(collision):
   v = v.bounce(collision.normal)
