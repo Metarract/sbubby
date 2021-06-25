@@ -36,13 +36,15 @@ func _physics_process(delta):
         WeaponState.state = "standard_torpedo"
     var collision = move_and_collide(v * delta)
     if collision:
-      handle_collision()
+      handle_collision(collision)
   pass
 
 func kill_projectile():
   queue_free()
 
 
-func handle_collision():
+func handle_collision(collision: KinematicCollision2D):
+  if (collision.collider.collision_layer & 4):
+    collision.collider.call("_tick_damage", 20)
   kill_projectile()
   pass

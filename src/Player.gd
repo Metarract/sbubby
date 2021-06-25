@@ -19,7 +19,6 @@ func _init():
   speed = 10
 
 func _ready():
-  print(GameState.state)
   $AnimatedSprite.play("init")
   $AnimatedSprite/Bubbles.emitting = false
   emit_signal("depth_changed", depth)
