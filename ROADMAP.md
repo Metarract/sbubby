@@ -14,7 +14,7 @@
     - wall_collision x
 1. Hit detection with missile / enemy x
 1. Enemy death
-1. Enemy with simple AI to approach player
+1. Enemy with simple AI to approach player x
 1. Enemy drops item
 1. Item needs armor_quality (factor of 100)
 1. Item adjusts player armor if quality is high enough

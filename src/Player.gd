@@ -1,8 +1,7 @@
 extends Unit
+class_name Player
 
 var prevHealth = health
-
-var airborne = true
 
 var crushDepth = 100
 var depth: int = 0
@@ -65,13 +64,9 @@ func _process(_delta):
   
 
 func get_movement(delta) -> KinematicCollision2D:
-  airborne = false
   moving = false
+  var collision = _move_and_collide(delta)
   $AnimatedSprite/Bubbles.emitting = false
-  var coeff = 1
-  
-  if (position.y <= -7):
-    airborne = true
   if (!airborne):
     if Input.is_action_pressed("ui_right"):
       dv.x += speed
@@ -90,8 +85,8 @@ func get_movement(delta) -> KinematicCollision2D:
     # decel a bit faster if we've stopped moving
     if (!moving):
       coeff = 0.95
-  else:
-    dv.y += 9.8
+    else:
+      coeff = 1
   # fast-track decel if we're close enough
   if abs(dv.x) < 2:
     dv.x = 0
@@ -102,11 +97,8 @@ func get_movement(delta) -> KinematicCollision2D:
     $AnimatedSprite.scale.x = -1
   elif (dv.x > 0):
     $AnimatedSprite.scale.x = 1
-  if v.length() > 0:
-    v *= friction * coeff
-  
   # TODO MOVE THIS TO MAIN FUNC
-  return _move_and_collide(delta)
+  return collision
 
 func handle_collision(collision):
   v = v.bounce(collision.normal)
