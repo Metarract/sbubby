@@ -5,6 +5,7 @@ var prevHealth = health
 
 var crushDepth = 100
 var depth: int = 0
+var missile_side = -1
 
 signal depth_changed(depth)
 signal health_changed(health)
@@ -30,6 +31,8 @@ func _input(event):
       var new_missile = missile.instance()
       new_missile.position = to_global($AnimatedSprite/WeaponInit.position)
       new_missile.direction = $AnimatedSprite.scale.x
+      new_missile.z_index = missile_side
+      missile_side *= -1
       var root = get_tree().get_root()
       root.add_child(new_missile)
       (get_tree()).set_input_as_handled()

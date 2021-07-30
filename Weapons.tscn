@@ -68,4 +68,3 @@ lifetime = 0.25
 spread = 1.0
 gravity = -1.747
 initial_velocity = -10.0
-particle_z_index = -159

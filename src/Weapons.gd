@@ -12,6 +12,7 @@ func _init():
   state = WeaponState.state
 
 func _ready():
+  $AnimatedSprite/Bubbles.particle_z_index = z_index
   match state:
     "standard_torpedo":
       $AnimatedSprite.animation = "default"

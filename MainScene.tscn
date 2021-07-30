@@ -19,7 +19,7 @@ layer = 10
 
 [node name="Collision_Map" type="TileMap" parent="."]
 position = Vector2( 0, -32 )
-z_index = 1
+z_index = 100
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
