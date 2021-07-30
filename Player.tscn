@@ -89,8 +89,10 @@ collision_layer = 3073
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 1.46423, 0.846443 )
 frames = SubResource( 13 )
 animation = "deactivate_brights"
+offset = Vector2( -1.46423, -0.846443 )
 
 [node name="Bubbles" parent="AnimatedSprite" instance=ExtResource( 3 )]
 position = Vector2( -7.73538, 1.41901 )
@@ -105,8 +107,11 @@ initial_velocity_randomness = true
 damping = 0.3
 particle_z_index = -10
 
+[node name="WeaponInit" type="Position2D" parent="AnimatedSprite"]
+position = Vector2( 0.111359, 4.4545 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.8974, 1.5085 )
+position = Vector2( 3.12012, 1.5085 )
 rotation = 1.5708
 shape = SubResource( 14 )
 __meta__ = {
@@ -118,6 +123,9 @@ current = true
 smoothing_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Light2D" type="Light2D" parent="."]
 z_index = 100
@@ -133,8 +141,9 @@ shadow_enabled = true
 shadow_color = Color( 0.0509804, 0.121569, 0.27451, 0.0117647 )
 shadow_filter = 5
 shadow_filter_smooth = 10.1
-
-[node name="WeaponInit" type="Position2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]

@@ -29,7 +29,7 @@ func _process(delta):
   # TODO do something with different texture types, doofus
   if (texture.get_class() == "AtlasTexture" && texture_randomness):
     texture = texture as AtlasTexture
-    var region = texture.region
+    var _region = texture.region
   var particle_dict = gen_particle()
   if (particle_dict):
     particle_array.append(particle_dict)

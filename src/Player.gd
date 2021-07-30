@@ -28,7 +28,7 @@ func _input(event):
   if GameState.state == "main":
     if event.is_action_pressed("player_fire"):
       var new_missile = missile.instance()
-      new_missile.position = to_global($WeaponInit.position)
+      new_missile.position = to_global($AnimatedSprite/WeaponInit.position)
       new_missile.direction = $AnimatedSprite.scale.x
       var root = get_tree().get_root()
       root.add_child(new_missile)
@@ -92,7 +92,7 @@ func get_movement(delta) -> KinematicCollision2D:
     dv.x = 0
   if abs(dv.y) < 2:
     dv.y = 0
-  # set direction, just use flip_h to determine direction to shoot as well
+  # set direction
   if (dv.x < 0):
     $AnimatedSprite.scale.x = -1
   elif (dv.x > 0):

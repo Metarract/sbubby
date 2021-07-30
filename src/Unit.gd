@@ -13,7 +13,6 @@ var moving = false
 var state: String = "default"
 var airborne = false
 
-
 var count: int = 0
 
 func _move_and_collide(delta) -> KinematicCollision2D:

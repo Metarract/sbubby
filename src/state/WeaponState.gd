@@ -7,5 +7,6 @@ func _init():
     "chain_lightning",
     "machinegun_torpedo",
     "bfg",
-    "pride_torpedo"
+    "pride_torpedo",
+    "dead"
   ]

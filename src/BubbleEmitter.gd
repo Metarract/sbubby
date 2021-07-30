@@ -5,7 +5,7 @@ func _process(delta):
   process_bubbles(delta);
   
 
-func process_bubbles(delta):
+func process_bubbles(_delta):
   for particle in particle_array:
     if (particle.sprite.position.y <= -7):
       particle.sprite.position.y = -8
