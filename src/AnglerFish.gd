@@ -19,6 +19,7 @@ func _ready():
   idle_timer_threshold = randf() * 20
 
 func _physics_process(delta):
+  var airborne = false
   match state:
     "dying":
       $CollisionPolygon2D.disabled = true
@@ -37,18 +38,18 @@ func _physics_process(delta):
     "seek":
       attack_timer += delta
       $AnimatedSprite.animation = "seek"
-      follow_player()
+      follow_player(airborne)
     "attack":
       attack_timer += delta
       $AnimatedSprite.playing = true
       $AnimatedSprite.animation = "attack"
     _:
       state = "idle"
-  var collision = _move_and_collide(delta)
+  var collision = _move_and_collide(delta, airborne)
   if (collision): 
     print("hey I think we hit something")
 
-func follow_player():
+func follow_player(airborne):
   if (!airborne):
     dv = position.direction_to(player.position)
   if (dv.x > 0):

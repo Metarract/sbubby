@@ -1,18 +1,23 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MainScene.tres" type="TileSet" id=2]
 [ext_resource path="res://GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://enemy1.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/1px_bg.png" type="Texture" id=5]
-[ext_resource path="res://src/CanvasShadow.gd" type="Script" id=6]
+[ext_resource path="res://src/Backdrop.gd" type="Script" id=6]
 [ext_resource path="res://bg.tres" type="TileSet" id=7]
+[ext_resource path="res://AirCollider.tscn" type="PackedScene" id=8]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 cull_mode = 2
 polygon = PoolVector2Array( 0.792969, 514.663, 0.773079, 504.911, 5.12262, 494.668, 10.1737, 489.477, 18.7325, 484.005, 26.0285, 481.619, 37.674, 481.058, 42.0236, 482.321, 45.5313, 484.706, 47.9165, 485.127, 54.9319, 491.301, 58.2993, 495.65, 61.1054, 500.561, 63.4906, 505.752, 63.0697, 516.977, 60.6845, 519.082, 56.1946, 519.783, 54.09, 522.449, 53.1079, 532.691, 51.8451, 527.921, 49.4599, 526.237, 47.9165, 529.324, 44.1282, 533.674, 44.2685, 541.25, 41.4623, 538.163, 38.3756, 538.444, 34.026, 543.074, 27.5719, 542.934, 21.3983, 535.217, 19.8549, 539.005, 19.7146, 534.516, 17.7503, 534.375, 16.7682, 537.883, 15.786, 533.253, 14.8039, 531.569, 13.5411, 526.518, 10.1737, 523.291, 7.78847, 523.291, 7.22723, 528.061, 5.82416, 520.765, 0.773079, 516.556 )
 
 [node name="Main" type="Node"]
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1920, 1080 )
+render_target_clear_mode = 2
 
 [node name="GUI" parent="." instance=ExtResource( 3 )]
 layer = 10
@@ -36,14 +41,14 @@ occluder = SubResource( 1 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 light_mask = 3072
 position = Vector2( 295.733, -167.872 )
-collision_layer = 1
-collision_mask = 2
+collision_mask = 130
 
 [node name="DeepBG" type="CanvasLayer" parent="."]
-layer = -1
+pause_mode = 2
+layer = -10
+script = ExtResource( 6 )
 
-[node name="Sprite" type="Sprite" parent="DeepBG"]
-scale = Vector2( 640, 360 )
+[node name="backdrop" type="Sprite" parent="DeepBG"]
 z_index = -2
 texture = ExtResource( 5 )
 centered = false
@@ -51,28 +56,16 @@ centered = false
 [node name="anglerfish1" parent="." instance=ExtResource( 4 )]
 position = Vector2( 605.983, 605.694 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
-light_mask = 3072
-z_as_relative = false
-color = Color( 0, 0, 0, 1 )
-script = ExtResource( 6 )
-max_depth = 100.0
-min_transition_depth = 30.0
-
-[node name="Sprite" type="Sprite" parent="CanvasLayer"]
-scale = Vector2( 640, 360 )
-texture = ExtResource( 5 )
-centered = false
-
 [node name="BG_Map" type="TileMap" parent="."]
 tile_set = ExtResource( 7 )
 cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0, -65521, 0, 0, -65520, 0, 0, -65519, 0, 0, -65518, 0, 0, -65517, 0, 0 )
 
+[node name="AirCollider" parent="." instance=ExtResource( 8 )]
+position = Vector2( 323.851, -134.765 )
+scale = Vector2( 35.04, 12.72 )
+
 [connection signal="crush_depth_changed" from="Player" to="GUI" method="_on_Player_crush_depth_changed"]
-[connection signal="depth_changed" from="Player" to="CanvasLayer/CanvasModulate" method="_on_Player_depth_changed"]
 [connection signal="depth_changed" from="Player" to="GUI" method="_on_Player_depth_changed"]
 [connection signal="health_changed" from="Player" to="GUI" method="_on_Player_health_changed"]

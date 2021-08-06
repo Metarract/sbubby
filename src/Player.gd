@@ -13,17 +13,29 @@ signal crush_depth_changed(crush_depth)
 
 var missile = preload("res://Weapons.tscn")
 
+var areaCollider: Area2D
+
 func _init():
   maxspeed = 300
   friction = 0.99
   speed = 10
 
 func _ready():
+  v = Vector2.ZERO
   $AnimatedSprite.play("init")
   $AnimatedSprite/Bubbles.emitting = false
   emit_signal("depth_changed", depth)
   emit_signal("health_changed", health)
   emit_signal("crush_depth_changed", crushDepth)
+  # instance area2d
+  areaCollider = Area2D.new()
+  add_child(areaCollider)
+  var collisionShape2d = CollisionShape2D.new()
+  collisionShape2d.shape = $CollisionShape2D.shape
+  areaCollider.add_child(collisionShape2d)
+  areaCollider.set_collision_mask_bit(7, 128)
+  areaCollider.set_collision_layer_bit(0, 1)
+  print(areaCollider.get_children())
 
 func _input(event):
   if GameState.state == "main":
@@ -39,8 +51,15 @@ func _input(event):
       pass
 
 func _physics_process(delta):
-  var collision = get_movement(delta)
+  var areaCollisions = areaCollider.get_overlapping_areas()
+  var airborne = false
+  for areaCollision in areaCollisions:
+    if areaCollision.collision_layer == 128:
+      airborne = true
+    pass
+  var collision = get_movement(delta, airborne)
   if (collision):
+    print(collision)
     handle_collision(collision)
 
 func _process(_delta):
@@ -66,9 +85,11 @@ func _process(_delta):
     emit_signal("crush_depth_changed", crushDepth)
   
 
-func get_movement(delta) -> KinematicCollision2D:
+func get_movement(delta, airborne) -> KinematicCollision2D:
+  $Camera2D.dest.x = dv.x * 10
+  $Camera2D.dest.y = dv.y * 7
   moving = false
-  var collision = _move_and_collide(delta)
+  var collision = _move_and_collide(delta, airborne)
   $AnimatedSprite/Bubbles.emitting = false
   if (!airborne):
     if Input.is_action_pressed("ui_right"):
@@ -85,11 +106,13 @@ func get_movement(delta) -> KinematicCollision2D:
     if Input.is_action_pressed("ui_up"):
       dv.y -= speed
       moving = true
+  else:
+    moving = true
     # decel a bit faster if we've stopped moving
-    if (!moving):
-      coeff = 0.95
-    else:
-      coeff = 1
+  if (!moving):
+    coeff = 0.95
+  else:
+    coeff = 1
   # fast-track decel if we're close enough
   if abs(dv.x) < 2:
     dv.x = 0

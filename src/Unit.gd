@@ -11,19 +11,15 @@ var v: Vector2 = Vector2.ZERO
 var collision: KinematicCollision2D
 var moving = false
 var state: String = "default"
-var airborne = false
 
 var count: int = 0
 
-func _move_and_collide(delta) -> KinematicCollision2D:
-  if (position.y <= -7):
-    airborne = true
-  else:
-    airborne = false
+func _move_and_collide(delta, airborne) -> KinematicCollision2D:
   if airborne:
     dv.y += 9.8
   v += dv
-  v = v.clamped(maxspeed)
+  if !airborne:
+    v = v.clamped(maxspeed)
   dv = Vector2.ZERO
   if v.length() > 0:
     v *= friction * coeff

@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://src/BubbleEmitter.gd"
 }, {
 "base": "Node2D",
+"class": "CameraController",
+"language": "GDScript",
+"path": "res://src/CameraController.gd"
+}, {
+"base": "Node2D",
 "class": "Emitter",
 "language": "GDScript",
 "path": "res://src/Emitter.gd"
@@ -47,6 +52,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "BaseState": "",
 "BubbleEmitter": "",
+"CameraController": "",
 "Emitter": "",
 "MapGen": "",
 "Player": "",
@@ -67,8 +73,6 @@ WeaponState="*res://src/state/WeaponState.gd"
 
 [display]
 
-window/size/width=640
-window/size/height=360
 window/size/always_on_top=true
 window/size/test_width=1280
 window/size/test_height=720
@@ -112,13 +116,20 @@ player_fire={
 
 [layer_names]
 
+2d_render/layer_1="Canvas"
 2d_physics/layer_1="Player"
+2d_render/layer_2="Units"
 2d_physics/layer_2="Terrain"
+2d_render/layer_3="Terrain"
 2d_physics/layer_3="Enemies"
+2d_render/layer_4="Background"
 2d_physics/layer_4="Player Projectiles"
+2d_render/layer_5="Foreground"
 2d_physics/layer_5="Enemy Projectiles"
+2d_render/layer_6="Misc"
 2d_physics/layer_6="NPCs"
 2d_physics/layer_7="Enemy Aggro Range"
+2d_physics/layer_8="Air"
 
 [rendering]
 

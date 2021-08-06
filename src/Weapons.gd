@@ -7,6 +7,8 @@ var direction: int = 1
 var maxspeed: int = 1
 var state: String
 var airborne = false
+var lifetime: float = 0
+var maxLifetime: int = 15
 
 func _init():
   state = WeaponState.state
@@ -17,9 +19,11 @@ func _ready():
     "standard_torpedo":
       $AnimatedSprite.animation = "default"
       maxspeed = 500
+      maxLifetime = 8
       continue
     "homing_torpedo":
-      maxspeed = 100
+      maxspeed = 50
+      maxLifetime = 16
       #TODO -> change how homing is processed
       continue
     _:
@@ -28,7 +32,10 @@ func _ready():
       rotation = atan2(0, direction)
 
 
-func _process(_delta):
+func _process(delta):
+  lifetime += delta
+  if lifetime >= maxLifetime:
+    kill_projectile()
   var angle = atan2(v.y,v.x)
   rotation = angle
   pass
