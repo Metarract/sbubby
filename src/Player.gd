@@ -1,6 +1,6 @@
 extends Unit
 class_name Player
-
+# SBUBBY
 var prevHealth = health
 
 var crushDepth = 100
@@ -28,14 +28,20 @@ func _ready():
   emit_signal("health_changed", health)
   emit_signal("crush_depth_changed", crushDepth)
   # instance area2d
-  areaCollider = Area2D.new()
+
+  areaCollider = AirCollider.getAirCollider($CollisionShape2D)
+  
+  areaCollider.connect("area_entered", self, "_on_air_entered")
+  areaCollider.connect("area_exited", self, "_on_air_exited")
   add_child(areaCollider)
-  var collisionShape2d = CollisionShape2D.new()
-  collisionShape2d.shape = $CollisionShape2D.shape
-  areaCollider.add_child(collisionShape2d)
-  areaCollider.set_collision_mask_bit(7, 128)
-  areaCollider.set_collision_layer_bit(0, 1)
-  print(areaCollider.get_children())
+
+func _on_air_entered(area: Area2D):
+  if (area.collision_layer == 128):
+    self.airborne = true
+
+func _on_air_exited(area: Area2D):
+  if (area.collision_layer == 128):
+    self.airborne = false
 
 func _input(event):
   if GameState.state == "main":
@@ -51,13 +57,14 @@ func _input(event):
       pass
 
 func _physics_process(delta):
-  var areaCollisions = areaCollider.get_overlapping_areas()
-  var airborne = false
-  for areaCollision in areaCollisions:
-    if areaCollision.collision_layer == 128:
-      airborne = true
-    pass
-  var collision = get_movement(delta, airborne)
+  # var areaCollisions = areaCollider.get_overlapping_areas()
+  # # get aircollider collisions
+  # var airborne = false
+  # for areaCollision in areaCollisions:
+  #   if areaCollision.collision_layer == 128:
+  #     airborne = true
+  #   pass
+  var collision = get_movement(delta)
   if (collision):
     print(collision)
     handle_collision(collision)
@@ -85,13 +92,13 @@ func _process(_delta):
     emit_signal("crush_depth_changed", crushDepth)
   
 
-func get_movement(delta, airborne) -> KinematicCollision2D:
+func get_movement(delta) -> KinematicCollision2D:
   $Camera2D.dest.x = dv.x * 10
   $Camera2D.dest.y = dv.y * 7
   moving = false
-  var collision = _move_and_collide(delta, airborne)
+  var collision = _move_and_collide(delta)
   $AnimatedSprite/Bubbles.emitting = false
-  if (!airborne):
+  if (!self.airborne):
     if Input.is_action_pressed("ui_right"):
       dv.x += speed
       moving = true

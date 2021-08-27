@@ -10,6 +10,9 @@ var airborne = false
 var lifetime: float = 0
 var maxLifetime: int = 15
 
+var areaCollider
+var torpedoCollider
+
 func _init():
   state = WeaponState.state
 
@@ -20,6 +23,7 @@ func _ready():
       $AnimatedSprite.animation = "default"
       maxspeed = 500
       maxLifetime = 8
+      torpedoCollider = $standard_torpedo
       continue
     "homing_torpedo":
       maxspeed = 50
@@ -30,7 +34,18 @@ func _ready():
       $AnimatedSprite.animation = state
       $AnimatedSprite.playing = true
       rotation = atan2(0, direction)
+  areaCollider = AirCollider.getAirCollider(torpedoCollider)
+  areaCollider.connect("area_entered", self, "_on_air_entered")
+  areaCollider.connect("area_exited", self, "_on_air_exited")
+  add_child(areaCollider)
 
+func _on_air_entered(area: Area2D):
+  if (area.collision_layer == 128):
+    self.airborne = true
+  
+func _on_air_exited(area: Area2D):
+  if (area.collision_layer == 128):
+    self.airborne = false
 
 func _process(delta):
   lifetime += delta
@@ -42,10 +57,6 @@ func _process(delta):
 
 func _physics_process(delta):
   if GameState.state == "main":
-    if position.y < -7:
-      airborne = true
-    else:
-      airborne = false
     if airborne:
       $AnimatedSprite/Bubbles.emitting = false
       dv.y += 9.8

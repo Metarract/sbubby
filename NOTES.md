@@ -1,20 +1,18 @@
 ## Considerations
 
 - PAUSE MODE?????
+  - SceneTree.paused -> boolean
 
 - Typescript in Godot?
     - https://github.com/GodotExplorer/ECMAScript
 - Particles2d -> replace my dumb script?
   - ParticleMaterial
 
-TODO: add area2d collision for other objects that need to know if they are airborne
-
 ## Ideas
 
 - AmbienFish
 - AngerFish -> like an anglerfish but. angier.
 - Shocky Fish
-
 
 - fishing
   - speed boost via fish (see dolphins, MC)
@@ -30,3 +28,11 @@ TODO: add area2d collision for other objects that need to know if they are airbo
   - shark? (what do we do with anglerfish lady NPC and her minions)
     - multiple vendors?
     - sharks vs jets
+
+- limited use secondary fires (ala isaac bombs)
+  - open up other paths
+  - sekrit areas
+
+- Different starting parameters?
+  - map generation
+    - differing paths

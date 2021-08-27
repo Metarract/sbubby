@@ -11,14 +11,15 @@ var v: Vector2 = Vector2.ZERO
 var collision: KinematicCollision2D
 var moving = false
 var state: String = "default"
+var airborne
 
 var count: int = 0
 
-func _move_and_collide(delta, airborne) -> KinematicCollision2D:
-  if airborne:
+func _move_and_collide(delta) -> KinematicCollision2D:
+  if self.airborne:
     dv.y += 9.8
   v += dv
-  if !airborne:
+  if !self.airborne:
     v = v.clamped(maxspeed)
   dv = Vector2.ZERO
   if v.length() > 0:

@@ -5,7 +5,7 @@
 1. Some terrain x
 1. Camera movement
     - easing x
-    - look-ahead
+    - look-ahead SOME
         - drag point from player to look ahead distance
         - separate x and y distances
 1. Terrain collision + vector flip when colliding x

@@ -70,6 +70,7 @@ func gen_particle():
     temp_velocity = initial_velocity
   var particle:Dictionary = {
     "sprite": sprite,
+    "collider": false,
     "lifetime": temp_lifetime,
     "velocity": temp_velocity  * get_parent().scale, # TODO this needs to just get the sign
     "direction": Vector2(cos(angle), sin(angle)),
