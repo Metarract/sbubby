@@ -47,7 +47,7 @@ rotation = 0.784495
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Debug/StaticBody2D"]
-position = Vector2( -151.032, -181.91 )
+position = Vector2( -150.874, -181.595 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Debug/StaticBody2D"]

@@ -76,6 +76,7 @@ config/icon="res://icon.png"
 
 GameState="*res://src/state/GameState.gd"
 WeaponState="*res://src/state/WeaponState.gd"
+PlayerNode="*res://Player.tscn"
 
 [display]
 

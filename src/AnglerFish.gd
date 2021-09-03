@@ -17,6 +17,7 @@ func _ready():
   state = "idle"
   $AnimatedSprite.playing = false
   idle_timer_threshold = randf() * 20
+  player = $"/root/PlayerNode"
 
 func _physics_process(delta):
   self.airborne = false
@@ -74,8 +75,7 @@ func _on_AnimatedSprite_animation_finished():
     _:
       pass
 
-func _on_Area2D_body_entered(body):
-  player = body
+func _on_Area2D_body_entered(_body):
   if state == "idle":
     state = "alert"
 

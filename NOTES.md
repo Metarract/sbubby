@@ -1,3 +1,12 @@
+## TODOS?
+
+- Shadows
+  - Global shadow applied over everythin
+  - sbubby's light cuts through that completely
+  - light still occluded by the occluders
+  - terrain only affected by global shadow
+    - probably?
+
 ## Considerations
 
 - PAUSE MODE?????

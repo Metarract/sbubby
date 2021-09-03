@@ -30,9 +30,11 @@ func _ready():
   # instance area2d
 
   areaCollider = AirCollider.getAirCollider($CollisionShape2D)
-  
-  areaCollider.connect("area_entered", self, "_on_air_entered")
-  areaCollider.connect("area_exited", self, "_on_air_exited")
+  var exitCode
+  exitCode = areaCollider.connect("area_entered", self, "_on_air_entered")
+  if (exitCode != 0): print("signal didn't connect! " + exitCode)
+  exitCode = areaCollider.connect("area_exited", self, "_on_air_exited")
+  if (exitCode != 0): print("signal didn't connect! " + exitCode)
   add_child(areaCollider)
 
 func _on_air_entered(area: Area2D):
@@ -93,8 +95,8 @@ func _process(_delta):
   
 
 func get_movement(delta) -> KinematicCollision2D:
-  $Camera2D.dest.x = dv.x * 10
-  $Camera2D.dest.y = dv.y * 7
+#  $Camera2D.dest.x = dv.x * 10
+#  $Camera2D.dest.y = dv.y * 7
   moving = false
   var collision = _move_and_collide(delta)
   $AnimatedSprite/Bubbles.emitting = false
