@@ -7,6 +7,9 @@ export(int) var max_particles = 50
 export(bool) var force_emit = false
 export(Texture) var texture:Texture
 export(bool) var texture_randomness = false
+export(int) var region_width = 0
+export(int) var region_height = 0
+
 export(float) var lifetime = 1
 export(bool) var lifetime_randomness = true
 export(float) var spread = 0
@@ -21,26 +24,48 @@ export(bool) var particle_z_index_as_relative = true
 var particle_array: = []
 var dv:Vector2 = Vector2(0, 0)
 
+var atlas_offsets:Vector2 = Vector2.ZERO
+
 func _ready():
-  # set seed on this emitter
   randomize()
+  if (texture.get_class() == "AtlasTexture" && texture_randomness):
+    slice_atlas()
+  # set seed on this emitter
 
 func _process(delta):
   # TODO do something with different texture types, doofus
   if (texture.get_class() == "AtlasTexture" && texture_randomness):
     texture = texture as AtlasTexture
-    var _region = texture.region
+    var x_offset = floor(randf() * atlas_offsets.x) * region_width
+    var y_offset = floor(randf() * atlas_offsets.y) * region_height
+    texture.region = Rect2(Vector2(x_offset, y_offset), Vector2(region_width, region_height))
   var particle_dict = gen_particle()
   if (particle_dict):
     particle_array.append(particle_dict)
   process_particles(delta)
+
+func slice_atlas():
+  texture = texture as AtlasTexture
+  var text_width = texture.atlas.get_width()
+  var text_height = texture.atlas.get_height()
+  var horizontal_slices = text_width/region_width
+  var vertical_slices = text_height/region_height
+  atlas_offsets = Vector2(horizontal_slices, vertical_slices)
+  print(atlas_offsets)
 
 func gen_particle():
   # if we don't have room / we're not emitting, get outta here
   if ((particle_array.size() >= max_particles && !force_emit) || !emitting):
     return
   var sprite = Sprite.new()
-  sprite.texture = texture
+  var tempTex;
+  if (texture.get_class() == "AtlasTexture"):
+    tempTex = AtlasTexture.new()
+    tempTex.atlas = texture.atlas
+    tempTex.region = texture.region
+  else:
+    tempTex = texture
+  sprite.texture = tempTex
   sprite.z_as_relative = particle_z_index_as_relative
   sprite.z_index = particle_z_index
   # if we're local, attach to parent and respect parent coords. if we're global, attach to top node and respect top node coords

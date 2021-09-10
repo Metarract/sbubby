@@ -4,8 +4,8 @@ class_name CameraController
 var dest: Vector2 = Vector2.ZERO
 var followTransform: Node2D
 
-var lastPos: Vector2
-var currentPos: Vector2
+var lastPos: Vector2 = Vector2.ZERO
+var currentPos: Vector2 = Vector2.ZERO
 
 var lookaheadX: float
 var lookaheadY: float
@@ -30,7 +30,8 @@ export(float, 0, 20, 0.1) var lookAheadGizmoExtents
 
 func _ready():
   followTransform = $"/root/PlayerNode"
-  position = followTransform.position
+  position = to_global(followTransform.position)
+  dest = position
   if (OS.is_debug_build()):
     # init debug draws
     deadZoneBox.default_color = Color(0.2,0.2,1,0.5)
@@ -53,21 +54,24 @@ func _ready():
     add_child(lookAheadPoint)
 
 func _process(delta):
-  # TODO: why the fuck does the dest jitter back and forth?
-  # are we manipulating our vectors incorrectly?
-  currentPos = followTransform.position
+  currentPos = to_global(followTransform.position)
   # get vector out of lastPos -> currentPos
   # negate vector to get direction
+  print('############')
+  print(currentPos)
+  print(lastPos)
   var dirVector = currentPos - lastPos
-  # multiply vector by lookahead strength
+  # multiply vector by lookahead strength*
   dirVector *= 25
-  dest = currentPos + dirVector
-  position = position.linear_interpolate(to_local(dest), lookAheadSmoothing*delta)
+  # vvvvvvvvvvvvvv
+  dest = to_local(followTransform.position) + dirVector
+  position = position.linear_interpolate(dest, lookAheadSmoothing*delta)
+  # ^^^^^^^^^^^^^^
   lastPos = currentPos
   if (OS.is_debug_build()):
-    update()
+    draw_debug()
 
-func _draw():
+func draw_debug():
   deadZoneBox.clear_points()
   softZoneBox.clear_points()
   lookAheadPoint.clear_points()

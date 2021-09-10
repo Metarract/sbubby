@@ -1,11 +1,11 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/player32.png" type="Texture" id=1]
 [ext_resource path="res://src/Player.gd" type="Script" id=2]
 [ext_resource path="res://Emitter.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/BubbleEmitter.gd" type="Script" id=4]
 [ext_resource path="res://assets/orb_light.png" type="Texture" id=5]
-[ext_resource path="res://assets/particles/bubbles1.png" type="Texture" id=6]
+[ext_resource path="res://assets/particles.png" type="Texture" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -78,7 +78,11 @@ animations = [ {
 "speed": 24.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=14]
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="CapsuleShape2D" id=15]
 radius = 6.54325
 height = 7.37291
 
@@ -101,7 +105,10 @@ __meta__ = {
 position = Vector2( -7.73538, 1.41901 )
 script = ExtResource( 4 )
 max_particles = 150
-texture = ExtResource( 6 )
+texture = SubResource( 16 )
+texture_randomness = true
+region_width = 32
+region_height = 32
 lifetime = 3.0
 spread = 1.0
 gravity = -1.747
@@ -120,7 +127,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 3.12012, 1.5085 )
 rotation = 1.5708
-shape = SubResource( 14 )
+shape = SubResource( 15 )
 __meta__ = {
 "_edit_lock_": true
 }
