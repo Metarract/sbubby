@@ -32,17 +32,17 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="MapGen" parent="." instance=ExtResource( 2 )]
 light_mask = 4
-position = Vector2( 284.257, 591.141 )
+position = Vector2( 405.073, 451.448 )
 z_as_relative = false
 
 [node name="anglerfish1" parent="." instance=ExtResource( 4 )]
-position = Vector2( 605.983, 605.694 )
+position = Vector2( 726.799, 466 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( -4.309, 0 )
+position = Vector2( 120.816, -139.693 )
 current = true
 script = ExtResource( 1 )
-lookAheadSmoothing = 2.26
+lookAheadSmoothing = 1.0
 deadZoneWidth = 179.1
 deadZoneHeight = 124.6
 softZoneWidth = 706.4

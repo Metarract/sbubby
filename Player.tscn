@@ -78,7 +78,7 @@ animations = [ {
 "speed": 24.0
 } ]
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 32, 32 )
 
@@ -105,7 +105,7 @@ __meta__ = {
 position = Vector2( -7.73538, 1.41901 )
 script = ExtResource( 4 )
 max_particles = 150
-texture = SubResource( 16 )
+texture = SubResource( 14 )
 texture_randomness = true
 region_width = 32
 region_height = 32

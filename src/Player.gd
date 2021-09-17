@@ -95,8 +95,7 @@ func _process(_delta):
   
 
 func get_movement(delta) -> KinematicCollision2D:
-#  $Camera2D.dest.x = dv.x * 10
-#  $Camera2D.dest.y = dv.y * 7
+#  dv.x = 10 # TODO REMOVE ME
   moving = false
   var collision = _move_and_collide(delta)
   $AnimatedSprite/Bubbles.emitting = false
