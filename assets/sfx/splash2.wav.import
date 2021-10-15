@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/splash2.wav-970b52651844971d19a7a45b7e50e265.sample"
+
+[deps]
+
+source_file="res://assets/sfx/splash2.wav"
+dest_files=[ "res://.import/splash2.wav-970b52651844971d19a7a45b7e50e265.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
