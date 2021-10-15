@@ -48,7 +48,7 @@ func _physics_process(delta):
       state = "idle"
   var collision = _move_and_collide(delta)
   if (collision): 
-    print("hey I think we hit something")
+    pass
 
 func follow_player():
   if (!self.airborne):

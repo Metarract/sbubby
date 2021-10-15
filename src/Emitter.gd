@@ -51,7 +51,6 @@ func slice_atlas():
   var horizontal_slices = text_width/region_width
   var vertical_slices = text_height/region_height
   atlas_offsets = Vector2(horizontal_slices, vertical_slices)
-  print(atlas_offsets)
 
 func gen_particle():
   # if we don't have room / we're not emitting, get outta here
@@ -74,7 +73,7 @@ func gen_particle():
     add_child(sprite)
   else:
     sprite.position = to_global(position)
-    var root = get_tree().get_root()
+    var root = get_node("/root")
     root.add_child(sprite)
   # determine base values vis a vis randomness
   if (spread > 0):

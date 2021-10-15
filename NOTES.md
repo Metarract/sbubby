@@ -2,8 +2,8 @@ S.ubmersible
 B.uilt for
 U.nderwater
 B.eatings,
-B.ailouts, and
-Y
+B.ailouts, and viewers like
+Y.ou
 
 ## TODOS?
 

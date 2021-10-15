@@ -1,3 +1,5 @@
+https://trello.com/b/snsUjo5Y/sbubby
+
 ## Road Map
 
 1. Player character x
@@ -13,6 +15,13 @@
     - kill_instance x
     - wall_collision x
 1. Hit detection with missile / enemy x
+1. map pieces !!! START HERE IDIOT !!!
+    - make a giant scene that's JUST for organization and visualization of map pieces
+    - construct each map "tile"
+    - create new scenes out of them
+    - mapgen instances all these scenes as necessary and assigns them to their new position along the array
+    - multiplying the tilesize by the array position
+1. map pieces properly assembled during mapgen
 1. Enemy death
 1. Enemy with simple AI to approach player x
 1. Enemy drops item

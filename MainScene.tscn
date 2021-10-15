@@ -3,17 +3,14 @@
 [ext_resource path="res://src/CameraController.gd" type="Script" id=1]
 [ext_resource path="res://MapGen.tscn" type="PackedScene" id=2]
 [ext_resource path="res://GUI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://enemy1.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/1px_bg.png" type="Texture" id=5]
 [ext_resource path="res://src/Backdrop.gd" type="Script" id=6]
+[ext_resource path="res://player.tscn" type="PackedScene" id=7]
 
 [node name="Main" type="Node"]
 
 [node name="GUI" parent="." instance=ExtResource( 3 )]
 layer = 10
-
-[node name="Map" type="CanvasLayer" parent="."]
-follow_viewport_enable = true
 
 [node name="BG" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -35,16 +32,22 @@ light_mask = 4
 position = Vector2( 405.073, 451.448 )
 z_as_relative = false
 
-[node name="anglerfish1" parent="." instance=ExtResource( 4 )]
-position = Vector2( 726.799, 466 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="camera" type="Camera2D" parent="."]
 position = Vector2( 120.816, -139.693 )
 current = true
+zoom = Vector2( 0.5, 0.5 )
+process_mode = 0
 script = ExtResource( 1 )
-lookAheadSmoothing = 1.0
-deadZoneWidth = 179.1
-deadZoneHeight = 124.6
-softZoneWidth = 706.4
-softZoneHeight = 381.0
-lookAheadGizmoExtents = 9.2
+lookAheadSmoothing = 0.5
+lookAheadXDamping = 0.5
+lookAheadYDamping = 0.4
+deadZoneWidth = 5.0
+deadZoneHeight = 5.0
+softZoneWidth = 300.0
+softZoneHeight = 200.0
+lookAheadGizmoExtents = 5.0
+
+[node name="player" parent="." instance=ExtResource( 7 )]
+position = Vector2( 12.4867, -144.489 )
+
+[connection signal="ready" from="." to="camera" method="_on_parent_ready"]

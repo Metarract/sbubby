@@ -1,6 +1,8 @@
 extends Node
 class_name MapGen
 
+const MAP_SIZE = 1184
+
 enum RoomEntrances {
   TOP = 1,
   RIGHT = 2,
@@ -21,6 +23,11 @@ func _init():
   print('Walking Map')
   walkMap()
   print('Done')
+  # for each valid entry
+  # check neighbours and set bitmask
+  # get list of valid map tiles
+  # randomly choose one
+  # update 
 
 func initMap():
   for _x in range(MAX_MAP_WIDTH):
