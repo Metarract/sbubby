@@ -4,7 +4,10 @@ class_name PlayerPersistentState
 
 var states
 var state
+
 var engine_cutoff = 8
+var splash_cd = 20 setget reset_splash_cd
+var velocity = Vector2.ZERO
 
 func _init():
   states = {
@@ -14,10 +17,18 @@ func _init():
   }
 
 func _ready():
+  $sub_body/face.play("idle")
   change_state("airborne")
   pass
 
 func _process(delta):
+  var splash = $sub_body/splash
+  if (splash_cd > 0):
+    splash_cd -= 1
+    splash.emitting = true
+  else:
+    splash.emitting = false
+  pass
   # calc depth
   var depth = int(floor(position.y/10))
   var face: AnimatedSprite = $sub_body/face
@@ -49,6 +60,9 @@ func change_state(new_state):
     self
   )
   add_child(state)
+
+func reset_splash_cd(_val):
+  splash_cd = 20
 
 func _on_AnimatedSprite_animation_finished():
   if ($sub_body/face.animation == "activate_brights"):
