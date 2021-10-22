@@ -1,27 +1,27 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/weapons.png" type="Texture" id=1]
-[ext_resource path="res://src/Weapons.gd" type="Script" id=2]
-[ext_resource path="res://src/BubbleEmitter.gd" type="Script" id=3]
-[ext_resource path="res://assets/particles.png" type="Texture" id=4]
+[ext_resource path="res://assets/particles.png" type="Texture" id=1]
+[ext_resource path="res://assets/weapons.png" type="Texture" id=2]
+[ext_resource path="res://src/Weapons.gd" type="Script" id=3]
+[ext_resource path="res://src/BubbleEmitter.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1.00003, 3.99999 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=6]
@@ -43,14 +43,14 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 16 )
 
 [node name="Projectile" type="KinematicBody2D"]
 position = Vector2( 0, -0.0248032 )
 collision_layer = 8
 collision_mask = 6
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="standard_torpedo" type="CollisionShape2D" parent="."]
 position = Vector2( 4, 1.0248 )
@@ -58,13 +58,14 @@ rotation = 1.57079
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 32
 frames = SubResource( 6 )
 playing = true
 centered = false
 
 [node name="Bubbles" type="Node2D" parent="AnimatedSprite"]
 position = Vector2( -1, 1.0248 )
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 max_particles = 100
 force_emit = true
 texture = SubResource( 7 )

@@ -8,13 +8,16 @@ var depth: int = 0
 var missile_side = -1
 
 var splash_cd = 0
+var bubb_cd = 0
 var engine_cutoff = 0
 
 signal depth_changed(depth)
 signal health_changed(health)
 signal crush_depth_changed(crush_depth)
 
-var missile = preload("res://Weapons.tscn")
+var missile = preload("res://scenes/Weapons.tscn")
+
+var bubble_sfx = preload("res://scenes/bubbles_sfx.tscn")
 
 var areaCollider: Area2D
 
@@ -24,6 +27,7 @@ func _init():
   speed = 10
 
 func _ready():
+  randomize()
   v = Vector2.ZERO
   $sub_body/face.play("init")
   $sub_body/bubbles.emitting = false
@@ -79,6 +83,16 @@ func _physics_process(delta):
     handle_collision(collision)
 
 func _process(delta):
+  # make da bubble sounds :)
+  if ($sub_body/bubbles.emitting):
+    if bubb_cd < 0.06:
+      bubb_cd += delta
+    else:
+      var bubbs = bubble_sfx.instance()
+      add_child(bubbs)
+      bubb_cd = 0
+    pass
+  
   # slowly turn the engine audio off
   if ($sub_body/engine/engine.playing):
     if (engine_cutoff < 8):

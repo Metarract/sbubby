@@ -9,6 +9,7 @@ var maxspeed: int = 100
 var dv: Vector2 = Vector2.ZERO
 var v: Vector2 = Vector2.ZERO
 var collision: KinematicCollision2D
+
 var moving = false
 var state: String = "default"
 var airborne
@@ -25,9 +26,3 @@ func _move_and_collide(delta) -> KinematicCollision2D:
   if v.length() > 0:
     v *= friction * coeff
   return move_and_collide(v * delta)
-
-func _tick_damage(damage):
-  health -= damage
-  if (health < 0):
-    health = 0
-    state = "dying"

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/sfx/bubble1.wav" type="AudioStream" id=1]
+[ext_resource path="res://src/bubbles_sfx.gd" type="Script" id=2]
+
+[node name="bubbles" type="AudioStreamPlayer"]
+stream = ExtResource( 1 )
+autoplay = true
+script = ExtResource( 2 )
+
+[connection signal="finished" from="." to="." method="_on_bubbles_finished"]

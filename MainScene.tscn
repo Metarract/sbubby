@@ -2,15 +2,12 @@
 
 [ext_resource path="res://src/CameraController.gd" type="Script" id=1]
 [ext_resource path="res://MapGen.tscn" type="PackedScene" id=2]
-[ext_resource path="res://GUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/directional_light.png" type="Texture" id=4]
 [ext_resource path="res://assets/1px_bg.png" type="Texture" id=5]
 [ext_resource path="res://src/Backdrop.gd" type="Script" id=6]
-[ext_resource path="res://player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=7]
 
 [node name="Main" type="Node"]
-
-[node name="GUI" parent="." instance=ExtResource( 3 )]
-layer = 10
 
 [node name="BG" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -23,9 +20,13 @@ z_index = -2
 texture = ExtResource( 5 )
 centered = false
 
+[node name="CanvasModulate" type="CanvasModulate" parent="BG"]
+light_mask = 63
+color = Color( 0.0392157, 0.0352941, 0.0352941, 1 )
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color( 0, 0, 0, 1 )
+light_mask = 63
+color = Color( 0.0392157, 0.0352941, 0.0352941, 1 )
 
 [node name="MapGen" parent="." instance=ExtResource( 2 )]
 light_mask = 4
@@ -49,5 +50,15 @@ lookAheadGizmoExtents = 5.0
 
 [node name="player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 12.4867, -144.489 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 313.596, 76.6174 )
+scale = Vector2( 33.5735, 13.8624 )
+texture = ExtResource( 4 )
+range_layer_min = -512
+range_layer_max = 512
+range_item_cull_mask = 63
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_item_cull_mask = 4
 
 [connection signal="ready" from="." to="camera" method="_on_parent_ready"]

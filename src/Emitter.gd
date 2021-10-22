@@ -57,6 +57,7 @@ func gen_particle():
   if ((particle_array.size() >= max_particles && !force_emit) || !emitting):
     return
   var sprite = Sprite.new()
+  sprite.light_mask = 32
   var tempTex;
   if (texture.get_class() == "AtlasTexture"):
     tempTex = AtlasTexture.new()

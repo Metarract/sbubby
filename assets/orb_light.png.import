@@ -14,15 +14,15 @@ dest_files=[ "res://.import/orb_light.png-e7a07ff24e26b84b382376a3a8cd1ddf.stex"
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
-flags/anisotropic=false
+flags/anisotropic=true
 flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false

@@ -3,6 +3,7 @@
 [ext_resource path="res://src/Emitter.gd" type="Script" id=1]
 
 [node name="Emitter" type="Node2D"]
+light_mask = 32
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": " "

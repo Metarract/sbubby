@@ -5,12 +5,14 @@ var circle_occluder_array = []
 
 func _ready():
   # TODO: shadows appear strangely on top/edges of terrain, fix??
-  player = $"/root/PlayerNode"
+  player = $"../../../player"
   var children = self.get_children()
   for child in children:
     var occluder = LightOccluder2D.new()
     occluder.z_index = -5
+    occluder.light_mask = 4
     occluder.occluder = OccluderPolygon2D.new()
+#    occluder.light_mask = 
     if child.get_class() == "CollisionPolygon2D":
       occluder.occluder.polygon = child.polygon
       child.add_child(occluder)
