@@ -5,7 +5,7 @@ class_name IdleState
 func _ready():
   speed = 0
   friction_coefficient = 0.95
-  $sub_body/bubbles.emitting = false
+  self.persistent_state.get_node("sub_body/bubbles").emitting = false
 
 func _input(event):
   if event.is_action_pressed("ui_right") or \
