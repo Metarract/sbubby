@@ -6,8 +6,15 @@ var states
 var state
 
 var engine_cutoff = 8
-var splash_cd = 20 setget reset_splash_cd
+var splash_cutoff = 200
+var splash_timer = 0
 var velocity = Vector2.ZERO
+var dv = Vector2.ZERO
+
+var areaCollider: Area2D
+
+var currentPos = Vector2.ZERO
+var lastPos = Vector2.ZERO
 
 func _init():
   states = {
@@ -18,13 +25,17 @@ func _init():
 
 func _ready():
   $sub_body/face.play("idle")
+  $sub_body/bubbles.emitting = false
+  # instance area2d
+  areaCollider = AirCollider.getAirCollider($body_collider)
+  add_child(areaCollider)
   change_state("airborne")
   pass
 
 func _process(delta):
+  # make splash bubs for X frames
   var splash = $sub_body/splash
-  if (splash_cd > 0):
-    splash_cd -= 1
+  if (OS.get_ticks_msec() < splash_timer):
     splash.emitting = true
   else:
     splash.emitting = false
@@ -59,17 +70,13 @@ func change_state(new_state):
     funcref(self, "change_state"),
     self
   )
-  add_child(state)
-
-func reset_splash_cd(_val):
-  splash_cd = 20
+  call_deferred("add_child", state)
 
 func _on_AnimatedSprite_animation_finished():
   if ($sub_body/face.animation == "activate_brights"):
     $sub_body/face.play("brights_on")
   if ($sub_body/face.animation == "deactivate_brights"):
     $sub_body/face.play("idle")
-    
 
 func _on_AnimatedSprite_frame_changed():
   if ($sub_body/face.animation == "activate_brights" && $sub_body/face.frame == 9):

@@ -6,7 +6,6 @@ var bubb_cd = 0.1
 var bubble_sfx = preload("res://scenes/bubbles_sfx.tscn")
 
 func _ready():
-  print(persistent_state)
   friction_coefficient = 0.99
   pass
 
@@ -22,7 +21,7 @@ func _process(delta):
     pass
 
 func _physics_process(_delta):
-  dv = Vector2.ZERO
+  var dv = Vector2.ZERO
   var moving = false
   persistent_state.get_node("sub_body/bubbles").emitting = false
   if Input.is_action_pressed("ui_right"):
@@ -39,6 +38,7 @@ func _physics_process(_delta):
   if Input.is_action_pressed("ui_up"):
     moving = true
     dv.y = -speed
+  persistent_state.dv = dv
   # set direction
   if (dv.x < 0):
     persistent_state.get_node("sub_body").scale.x = -1

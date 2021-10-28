@@ -42,17 +42,16 @@ script = ExtResource( 1 )
 lookAheadSmoothing = 0.5
 lookAheadXDamping = 0.5
 lookAheadYDamping = 0.4
-deadZoneWidth = 5.0
-deadZoneHeight = 5.0
-softZoneWidth = 300.0
-softZoneHeight = 200.0
+hardBoundaryWidth = 1000.0
+hardBoundaryHeight = 1000.0
+drawDebugBoxes = true
 lookAheadGizmoExtents = 5.0
 
 [node name="player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 12.4867, -144.489 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 313.596, 76.6174 )
+position = Vector2( 314, 76 )
 scale = Vector2( 33.5735, 13.8624 )
 texture = ExtResource( 4 )
 range_layer_min = -512
