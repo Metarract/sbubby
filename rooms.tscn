@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/map/debug.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/map/15-1.png" type="Texture" id=2]
+
+[node name="Rooms" type="Node"]
+
+[node name="Debug" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="1" type="Node" parent="."]
+
+[node name="2" type="Node" parent="."]
+
+[node name="3" type="Node" parent="."]
+
+[node name="4" type="Node" parent="."]
+
+[node name="5" type="Node" parent="."]
+
+[node name="6" type="Node" parent="."]
+
+[node name="7" type="Node" parent="."]
+
+[node name="8" type="Node" parent="."]
+
+[node name="9" type="Node" parent="."]
+
+[node name="10" type="Node" parent="."]
+
+[node name="11" type="Node" parent="."]
+
+[node name="12" type="Node" parent="."]
+
+[node name="13" type="Node" parent="."]
+
+[node name="14" type="Node" parent="."]
+
+[node name="15" type="Node" parent="."]
+
+[node name="15-1" type="Node2D" parent="15"]
+
+[node name="terrain" type="Sprite" parent="15/15-1"]
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="15/15-1"]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="15/15-1/StaticBody2D"]
+polygon = PoolVector2Array( -530.035, -530.079, -530.35, -593.39, -595.551, -596.225, -592.401, -530.709 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="15/15-1/StaticBody2D"]
+position = Vector2( 1125.52, -1.43555 )
+polygon = PoolVector2Array( -532.03, -528.842, -526.462, -596.773, -595.284, -592.764, -594.838, -529.287 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="15/15-1/StaticBody2D"]
+position = Vector2( -2.37842, 1124.99 )
+polygon = PoolVector2Array( -527.92, -531.857, -527.92, -594.559, -590.424, -595.154, -593.797, -528.682 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="15/15-1/StaticBody2D"]
+position = Vector2( 1126.29, 1126.45 )
+polygon = PoolVector2Array( -529.295, -529.749, -532.414, -595.898, -595.551, -596.225, -595.89, -532.644 )
