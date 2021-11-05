@@ -15,7 +15,7 @@ signal depth_changed(depth)
 signal health_changed(health)
 signal crush_depth_changed(crush_depth)
 
-var missile = preload("res://scenes/Weapons.tscn")
+var missile = preload("res://scenes/weapons.tscn")
 
 var bubble_sfx = preload("res://scenes/bubbles_sfx.tscn")
 

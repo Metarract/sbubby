@@ -14,7 +14,7 @@ var missile_cd = 200
 var missile_firetime = 0
 var speed = 10
 #
-var missile = preload("res://scenes/Weapons.tscn")
+var missile = preload("res://scenes/weapons.tscn")
 
 func _ready():
   randomize()
