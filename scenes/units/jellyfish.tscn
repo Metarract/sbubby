@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="jellyfish" type="Node2D"]
+
+[node name="node" type="Node2D" parent="."]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]

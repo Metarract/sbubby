@@ -28,6 +28,7 @@ func _ready():
   $sub_body/bubbles.emitting = false
   # instance area2d
   areaCollider = AirCollider.getAirCollider($body_collider)
+  areaCollider.rotation = $body_collider.rotation
   add_child(areaCollider)
   change_state("airborne")
   pass

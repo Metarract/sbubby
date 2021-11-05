@@ -1,4 +1,4 @@
-extends "Emitter.gd"
+extends "emitter.gd"
 class_name BubbleEmitter
 
 func _process(delta):

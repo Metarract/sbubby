@@ -23,12 +23,22 @@ Y.ou
     - https://github.com/GodotExplorer/ECMAScript
 - Particles2d -> replace my dumb script?
   - ParticleMaterial
+- Remote debuggin'?
+  - Debug menu -> Deploy with remote debug (look this shit up)
+- NavigationPath2D
+  - maybe useful for male anglerfishes helping out momma anglerfish
 
 ## Ideas
 
-- AmbienFish
-- AngerFish -> like an anglerfish but. angier.
-- Shocky Fish
+
+- enemies
+  - AmbienFish
+  - AngerFish -> like an anglerfish but. angier.
+  - Shocky Fish
+
+- npcs
+  - anglerfish momma
+  - blind cave fish + lost cave fish child
 
 - fishing
   - speed boost via fish (see dolphins, MC)
@@ -37,6 +47,7 @@ Y.ou
   - suicide bomb fish?
   - fish up scrap metals/garbage (rarely), repairs sub
   - money(?)
+  - pupfish
 
 - shop
   - giant anglerfish shopkeep
@@ -52,3 +63,9 @@ Y.ou
 - Different starting parameters?
   - map generation
     - differing paths
+
+- maybe a high current dead-end zone with a secret in it
+  - can't get past the current normally
+  - bring strong fish with you to have them help you through
+  - maybe pupfish pulls you?
+    - put a leash on the pupfish and they go wild and pull you through

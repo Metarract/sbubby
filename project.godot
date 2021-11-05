@@ -12,72 +12,72 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "AirCollider",
 "language": "GDScript",
-"path": "res://src/lib/AirCollider.gd"
+"path": "res://src/lib/air_collider.gd"
 }, {
 "base": "UnitState",
 "class": "AirborneState",
 "language": "GDScript",
-"path": "res://src/state/AirborneState.gd"
+"path": "res://src/state/airborne_state.gd"
 }, {
 "base": "Node",
 "class": "BaseState",
 "language": "GDScript",
-"path": "res://src/state/BaseState.gd"
+"path": "res://src/state/base_state.gd"
 }, {
 "base": "",
 "class": "BubbleEmitter",
 "language": "GDScript",
-"path": "res://src/BubbleEmitter.gd"
+"path": "res://src/bubble_emitter.gd"
 }, {
 "base": "Camera2D",
 "class": "CameraController",
 "language": "GDScript",
-"path": "res://src/CameraController.gd"
+"path": "res://src/camera_controller.gd"
 }, {
 "base": "Node2D",
 "class": "Emitter",
 "language": "GDScript",
-"path": "res://src/Emitter.gd"
+"path": "res://src/emitter.gd"
 }, {
 "base": "UnitState",
 "class": "IdleState",
 "language": "GDScript",
-"path": "res://src/state/IdleState.gd"
+"path": "res://src/state/idle_state.gd"
 }, {
 "base": "Node",
 "class": "MapGen",
 "language": "GDScript",
-"path": "res://src/MapGen.gd"
+"path": "res://src/map_gen.gd"
 }, {
 "base": "UnitState",
 "class": "MovingState",
 "language": "GDScript",
-"path": "res://src/state/MovingState.gd"
+"path": "res://src/state/moving_state.gd"
 }, {
 "base": "Unit",
 "class": "Player",
 "language": "GDScript",
-"path": "res://src/Player.gd"
+"path": "res://src/player.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "PlayerPersistentState",
 "language": "GDScript",
-"path": "res://src/state/PlayerPersistentState.gd"
+"path": "res://src/state/player_persistent_state.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Unit",
 "language": "GDScript",
-"path": "res://src/Unit.gd"
+"path": "res://src/unit.gd"
 }, {
 "base": "Node2D",
 "class": "UnitState",
 "language": "GDScript",
-"path": "res://src/state/UnitState.gd"
+"path": "res://src/state/unit_state.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Weapons",
 "language": "GDScript",
-"path": "res://src/Weapons.gd"
+"path": "res://src/weapons.gd"
 } ]
 _global_script_class_icons={
 "AirCollider": "",
@@ -99,13 +99,13 @@ _global_script_class_icons={
 [application]
 
 config/name="LDJ-48"
-run/main_scene="res://MainScene.tscn"
+run/main_scene="res://main_scene.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-GameState="*res://src/state/GameState.gd"
-WeaponState="*res://src/state/WeaponState.gd"
+GameState="*res://src/state/game_state.gd"
+WeaponState="*res://src/state/weapon_state.gd"
 
 [display]
 
