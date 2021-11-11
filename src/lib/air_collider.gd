@@ -1,15 +1,15 @@
 extends Reference
 class_name AirCollider
 
-static func getAirCollider(collisionShape=null,shape=null):
-  assert(collisionShape != null || shape != null)
-  var areaCollider = Area2D.new()
-  var collisionShape2d = CollisionShape2D.new()
-  if collisionShape != null:
-    collisionShape2d.shape = collisionShape.shape
+static func get_air_collider(collision_shape=null,shape=null):
+  assert(collision_shape != null || shape != null)
+  var area_collider = Area2D.new()
+  var collider_shape_2d = CollisionShape2D.new()
+  if collision_shape != null:
+    collider_shape_2d.shape = collision_shape.shape
   elif shape != null:
-    collisionShape2d.shape = shape
-  areaCollider.add_child(collisionShape2d)
-  areaCollider.set_collision_mask_bit(7, 128)
-  areaCollider.set_collision_layer_bit(0, 1)
-  return areaCollider
+    collider_shape_2d.shape = shape
+  area_collider.add_child(collider_shape_2d)
+  area_collider.set_collision_mask_bit(7, 128)
+  area_collider.set_collision_layer_bit(0, 1)
+  return area_collider

@@ -18,11 +18,11 @@ var missile = preload("res://scenes/weapons.tscn")
 
 func _ready():
   randomize()
-  var exitCode
-  exitCode = persistent_state.areaCollider.connect("area_entered", self, "_on_air_entered")
-  if (exitCode != 0): printerr("signal didn't connect! " + exitCode)
-  exitCode = persistent_state.areaCollider.connect("area_exited", self, "_on_air_exited")
-  if (exitCode != 0): printerr("signal didn't connect! " + exitCode)
+  var exit_code
+  exit_code = persistent_state.area_collider.connect("area_entered", self, "_on_air_entered")
+  if (exit_code != 0): printerr("signal didn't connect! " + exit_code)
+  exit_code = persistent_state.area_collider.connect("area_exited", self, "_on_air_exited")
+  if (exit_code != 0): printerr("signal didn't connect! " + exit_code)
 
 func _process(_delta):
   #handle visual inputs

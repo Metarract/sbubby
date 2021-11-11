@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 class_name PlayerPersistentState
 
+export(int) var follow_length = 10
+
 var states
 var state
 
@@ -11,10 +13,12 @@ var splash_timer = 0
 var velocity = Vector2.ZERO
 var dv = Vector2.ZERO
 
-var areaCollider: Area2D
+var area_collider: Area2D
 
 var currentPos = Vector2.ZERO
 var lastPos = Vector2.ZERO
+
+onready var follow_curve = get_parent().get_node("FollowCurve")
 
 func _init():
   states = {
@@ -27,13 +31,14 @@ func _ready():
   $sub_body/face.play("idle")
   $sub_body/bubbles.emitting = false
   # instance area2d
-  areaCollider = AirCollider.getAirCollider($body_collider)
-  areaCollider.rotation = $body_collider.rotation
-  add_child(areaCollider)
+  area_collider = AirCollider.get_air_collider($body_collider)
+  area_collider.rotation = $body_collider.rotation
+  add_child(area_collider)
   change_state("airborne")
   pass
 
 func _process(delta):
+  follow_curve.get_node("PathFollow2D").offset = 0
   # make splash bubs for X frames
   var splash = $sub_body/splash
   if (OS.get_ticks_msec() < splash_timer):

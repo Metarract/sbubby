@@ -10,7 +10,7 @@ func process_bubbles(_delta):
     if !particle.collider:
       var circleCollider = CircleShape2D.new()
       circleCollider.radius = 3
-      var areaCollider = AirCollider.getAirCollider(null, circleCollider)
+      var areaCollider = AirCollider.get_air_collider(null, circleCollider)
       particle.sprite.add_child(areaCollider)
       particle.collider = areaCollider
     var areaCollisions = particle.collider.get_overlapping_areas()

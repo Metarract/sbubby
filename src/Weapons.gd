@@ -35,7 +35,7 @@ func _ready():
       $AnimatedSprite.animation = state
       $AnimatedSprite.playing = true
       rotation = atan2(0, direction)
-  areaCollider = AirCollider.getAirCollider(torpedoCollider)
+  areaCollider = AirCollider.get_air_collider(torpedoCollider)
   areaCollider.connect("area_entered", self, "_on_air_entered")
   areaCollider.connect("area_exited", self, "_on_air_exited")
   add_child(areaCollider)
