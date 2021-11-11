@@ -38,16 +38,16 @@ z_as_relative = false
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2( 120.816, -139.693 )
+rotating = true
 current = true
 zoom = Vector2( 0.5, 0.5 )
 process_mode = 0
 script = ExtResource( 7 )
-lookAheadSmoothing = 0.5
-lookAheadXDamping = 0.5
-lookAheadYDamping = 0.4
-hardBoundaryWidth = 1000.0
-hardBoundaryHeight = 1000.0
-lookAheadGizmoExtents = 5.0
+look_ahead_smoothing = 0.527
+hard_boundary_width = 1000.0
+hard_boundary_height = 1000.0
+draw_debug = true
+look_ahead_gizmo_extants = 5.0
 
 [node name="player" parent="." instance=ExtResource( 4 )]
 light_mask = 2

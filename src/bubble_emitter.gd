@@ -8,18 +8,18 @@ func process_bubbles(_delta):
   for particle in particle_array:
     var airborne = false
     if !particle.collider:
-      var circleCollider = CircleShape2D.new()
-      circleCollider.radius = 3
-      var areaCollider = AirCollider.get_air_collider(null, circleCollider)
-      particle.sprite.add_child(areaCollider)
-      particle.collider = areaCollider
-    var areaCollisions = particle.collider.get_overlapping_areas()
-    for collision in areaCollisions:
+      var circle_collider = CircleShape2D.new()
+      circle_collider.radius = 3
+      var area_collider = AirCollider.get_air_collider(null, circle_collider)
+      particle.sprite.add_child(area_collider)
+      particle.collider = area_collider
+    var area_collisions = particle.collider.get_overlapping_areas()
+    for collision in area_collisions:
       if collision.collision_layer == 128:
         airborne = true
     if (airborne):
       particle.dy = 0
       if (randi() % 10 > 7):
         kill_particle(particle)
-    # TODO have bubbles twitch? at the surface
+    # TODO have bubbles twitch(?) at the surface
     # kill vertical, killish horizontal, random horizontal movement

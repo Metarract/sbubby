@@ -15,8 +15,8 @@ var dv = Vector2.ZERO
 
 var area_collider: Area2D
 
-var currentPos = Vector2.ZERO
-var lastPos = Vector2.ZERO
+var current_pos = Vector2.ZERO
+var last_pos = Vector2.ZERO
 
 onready var follow_curve = get_parent().get_node("FollowCurve")
 
