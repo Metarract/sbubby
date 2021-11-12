@@ -34,11 +34,10 @@ func _ready():
   area_collider = AirCollider.get_air_collider($body_collider)
   area_collider.rotation = $body_collider.rotation
   add_child(area_collider)
-  change_state("airborne")
+  change_state("idle")
   pass
 
 func _process(delta):
-  follow_curve.get_node("PathFollow2D").offset = 0
   # make splash bubs for X frames
   var splash = $sub_body/splash
   if (OS.get_ticks_msec() < splash_timer):

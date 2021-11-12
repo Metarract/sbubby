@@ -21,10 +21,6 @@ func _process(delta):
     pass
 
 func _physics_process(_delta):
-#  print(follow_curve.curve.get_point_count())  
-  persistent_state.follow_curve.curve.add_point(position)
-  if (persistent_state.follow_curve.curve.get_point_count() > persistent_state.follow_length):
-    persistent_state.follow_curve.curve.remove_point(0);
   var dv = Vector2.ZERO
   var moving = false
   persistent_state.get_node("sub_body/bubbles").emitting = false

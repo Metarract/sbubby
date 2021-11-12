@@ -22,6 +22,8 @@ https://trello.com/b/snsUjo5Y/sbubby
     - mapgen instances all these scenes as necessary and assigns them to their new position along the array
     - multiplying the tilesize by the array position
 1. map pieces properly assembled during mapgen
+1. science base
+1. scientists come out of base
 1. Enemy death
 1. Enemy with simple AI to approach player x
 1. Enemy drops item

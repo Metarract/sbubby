@@ -1,0 +1,98 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scenes/map/debug.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/map/6-0.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/map/8-0.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/map/12-0.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/map/15-0.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/map/2-0.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/map/11-0.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/map/3-0.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/map/7-0.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/map/9-0.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/map/5-0.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/map/4-0.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/map/10-0.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/map/13-0.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/map/14-0.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/map/1-0.tscn" type="PackedScene" id=16]
+
+[node name="Rooms" type="Node"]
+
+[node name="Debug" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="1" type="Node2D" parent="."]
+visible = false
+
+[node name="1-0" parent="1" instance=ExtResource( 16 )]
+
+[node name="2" type="Node2D" parent="."]
+visible = false
+
+[node name="2-0" parent="2" instance=ExtResource( 6 )]
+
+[node name="3" type="Node2D" parent="."]
+visible = false
+
+[node name="3-0" parent="3" instance=ExtResource( 8 )]
+
+[node name="4" type="Node2D" parent="."]
+visible = false
+
+[node name="4-0" parent="4" instance=ExtResource( 12 )]
+
+[node name="5" type="Node2D" parent="."]
+visible = false
+
+[node name="5-0" parent="5" instance=ExtResource( 11 )]
+
+[node name="6" type="Node2D" parent="."]
+visible = false
+
+[node name="6-0" parent="6" instance=ExtResource( 2 )]
+
+[node name="7" type="Node2D" parent="."]
+visible = false
+
+[node name="7-0" parent="7" instance=ExtResource( 9 )]
+
+[node name="8" type="Node2D" parent="."]
+visible = false
+
+[node name="8-0" parent="8" instance=ExtResource( 3 )]
+
+[node name="9" type="Node2D" parent="."]
+visible = false
+
+[node name="9-0" parent="9" instance=ExtResource( 10 )]
+
+[node name="10" type="Node2D" parent="."]
+visible = false
+
+[node name="10-0" parent="10" instance=ExtResource( 13 )]
+
+[node name="11" type="Node2D" parent="."]
+visible = false
+
+[node name="11-0" parent="11" instance=ExtResource( 7 )]
+
+[node name="12" type="Node2D" parent="."]
+visible = false
+
+[node name="12-0" parent="12" instance=ExtResource( 4 )]
+
+[node name="13" type="Node2D" parent="."]
+visible = false
+
+[node name="13-0" parent="13" instance=ExtResource( 14 )]
+
+[node name="14" type="Node2D" parent="."]
+visible = false
+
+[node name="14-0" parent="14" instance=ExtResource( 15 )]
+
+[node name="15" type="Node2D" parent="."]
+visible = false
+
+[node name="15-0" parent="15" instance=ExtResource( 5 )]
