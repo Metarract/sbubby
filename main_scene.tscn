@@ -21,10 +21,12 @@ texture = ExtResource( 2 )
 centered = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="BG"]
+visible = false
 light_mask = 63
 color = Color( 0.0392157, 0.0352941, 0.0352941, 1 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 light_mask = 63
 color = Color( 0.0392157, 0.0352941, 0.0352941, 1 )
 
@@ -51,6 +53,7 @@ light_mask = 2
 position = Vector2( 12.4867, -144.489 )
 
 [node name="Light2D" type="Light2D" parent="."]
+visible = false
 position = Vector2( 314, 76 )
 scale = Vector2( 33.5735, 13.8624 )
 texture = ExtResource( 1 )

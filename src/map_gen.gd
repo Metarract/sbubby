@@ -29,10 +29,8 @@ func _ready():
   print('Done')
   print("Placing Map Tiles")
   set_map_tile()
-  # get list of valid map tiles
-  # randomly choose one
-  # update
-#  print_map_tiles()
+  # debuggy 
+  print_map_tiles()
 
 
 func init_map():
@@ -50,6 +48,7 @@ func init_map():
     room_array.push_back(tempArray)
 
 func walk_map():
+  # TODO: make this set in the middle of the map
   var initX = floor(randf() * room_array.size())
   var current_room = room_array[initX][0]
   self.position.x -= current_room.x * MAP_SIZE
@@ -80,7 +79,7 @@ func walk_map():
     current_room = room_array[r.x][r.y]
     current_room.bits += new_room_bits
     current_room.room_id = "1"
-    if current_room.y == room_array[0].size()-1:
+    if current_room.y == room_array[0].size()-1: #this is the final room, so the bottom should be open for the boss
       current_room.bits += 4
 
 func probe_nodes(current_room) -> Array:
@@ -101,15 +100,15 @@ func set_tile_coordinates():
   for _x in range(max_map_width):
     for _y in range(max_map_height):
       var current_room = room_array[_x][_y]
-      if current_room.room_id == "1":
-        current_room.x *= MAP_SIZE
-        current_room.y *= MAP_SIZE
+      if current_room.room_id != "0":
+        current_room.x = _x * MAP_SIZE
+        current_room.y = _y * MAP_SIZE
 
 func set_map_tile():
   for _x in range(max_map_width):
     for _y in range(max_map_height):
       var current_room = room_array[_x][_y]
-      if current_room.room_id == "1":
+      if current_room.room_id != "0":
         current_room.room_id = String(current_room.bits) + "-0"
         # TODO this is definitely loading thigns too many times
         var map_tile = load("res://scenes/map/" + current_room.room_id + ".tscn")

@@ -2,8 +2,6 @@ extends KinematicBody2D
 
 class_name PlayerPersistentState
 
-export(int) var follow_length = 10
-
 var states
 var state
 
@@ -17,8 +15,6 @@ var area_collider: Area2D
 
 var current_pos = Vector2.ZERO
 var last_pos = Vector2.ZERO
-
-onready var follow_curve = get_parent().get_node("FollowCurve")
 
 func _init():
   states = {
