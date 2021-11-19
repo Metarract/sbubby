@@ -1,0 +1,203 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://assets/player.png" type="Texture" id=1]
+[ext_resource path="res://src/state/player_persistent_state.gd" type="Script" id=2]
+[ext_resource path="res://emitter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/bubble_emitter.gd" type="Script" id=4]
+[ext_resource path="res://assets/orb_light.png" type="Texture" id=5]
+[ext_resource path="res://assets/particles.png" type="Texture" id=6]
+[ext_resource path="res://assets/sfx/splash2.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sfx/splash1.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sfx/splash3.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sfx/engine.wav" type="AudioStream" id=10]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 32, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=15]
+animations = [ {
+"frames": [ SubResource( 3 ) ],
+"loop": false,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": false,
+"name": "deactivate_brights",
+"speed": 24.0
+}, {
+"frames": [ SubResource( 8 ) ],
+"loop": false,
+"name": "brights_on",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 11 ), SubResource( 11 ), SubResource( 11 ), SubResource( 11 ), SubResource( 11 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": false,
+"name": "activate_brights",
+"speed": 24.0
+} ]
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 6 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="CapsuleShape2D" id=17]
+radius = 4.99999
+height = 2.00001
+
+[node name="player" type="KinematicBody2D"]
+pause_mode = 1
+collision_mask = 210
+script = ExtResource( 2 )
+
+[node name="sub_body" type="Sprite" parent="."]
+light_mask = 2
+texture = SubResource( 1 )
+
+[node name="bubbles" parent="sub_body" instance=ExtResource( 3 )]
+position = Vector2( -5, 0 )
+script = ExtResource( 4 )
+max_particles = 150
+texture = SubResource( 2 )
+texture_randomness = true
+region_width = 16
+region_height = 16
+lifetime = 1.5
+spread = 1.0
+gravity = -1.74
+initial_velocity = -100.0
+initial_velocity_randomness = true
+damping = 0.3
+particle_z_index = -10
+
+[node name="weapon_pos" type="Position2D" parent="sub_body"]
+position = Vector2( 1.98756, 2.01137 )
+__meta__ = {
+"_gizmo_extents_": 13.9
+}
+
+[node name="face" type="AnimatedSprite" parent="sub_body"]
+light_mask = 2
+position = Vector2( 5, -1 )
+frames = SubResource( 15 )
+animation = "idle"
+playing = true
+offset = Vector2( -1.46423, -0.846443 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="engine" type="Node2D" parent="sub_body"]
+
+[node name="engine" type="AudioStreamPlayer" parent="sub_body/engine"]
+stream = ExtResource( 10 )
+autoplay = true
+
+[node name="engine_death" type="AudioStreamPlayer" parent="sub_body/engine"]
+
+[node name="splash" type="Node2D" parent="sub_body"]
+script = ExtResource( 4 )
+emitting = false
+max_particles = 100
+texture = SubResource( 16 )
+texture_randomness = true
+region_width = 32
+region_height = 32
+lifetime = 2.0
+spread = 7.0
+gravity = -0.7
+angle = 90.0
+initial_velocity = 30.0
+initial_velocity_randomness = true
+
+[node name="splash1" type="AudioStreamPlayer" parent="sub_body/splash"]
+stream = ExtResource( 8 )
+
+[node name="splash2" type="AudioStreamPlayer" parent="sub_body/splash"]
+stream = ExtResource( 7 )
+
+[node name="splash3" type="AudioStreamPlayer" parent="sub_body/splash"]
+stream = ExtResource( 9 )
+
+[node name="body_collider" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 0 )
+rotation = 1.5708
+shape = SubResource( 17 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="headlamp" type="Light2D" parent="."]
+visible = false
+position = Vector2( 5, 0 )
+z_index = 100
+z_as_relative = false
+enabled = false
+texture = ExtResource( 5 )
+texture_scale = 2.0
+range_layer_min = -512
+range_layer_max = 512
+range_item_cull_mask = 46
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_filter_smooth = 7.2
+shadow_item_cull_mask = 30
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="animation_finished" from="sub_body/face" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="frame_changed" from="sub_body/face" to="." method="_on_AnimatedSprite_frame_changed"]
