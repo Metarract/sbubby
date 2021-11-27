@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/laboratory_sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/bubble_emitter.gd" type="Script" id=2]
+[ext_resource path="res://assets/particles.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -23,13 +24,30 @@ animations = [ {
 "speed": 8.0
 } ]
 
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
 [node name="air_pump" type="AnimatedSprite"]
-position = Vector2( -8, -16 )
+light_mask = 4
 frames = SubResource( 4 )
-frame = 1
+frame = 3
 playing = true
 centered = false
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 5, 8 )
+position = Vector2( 2, 4 )
 script = ExtResource( 2 )
+local_coords = true
+max_particles = 300
+force_emit = true
+texture = SubResource( 5 )
+texture_randomness = true
+region_width = 16
+region_height = 16
+lifetime = 3.0
+spread = 2.0
+gravity = -0.485
+initial_velocity = -20.0
+initial_velocity_randomness = true
+damping = 0.61

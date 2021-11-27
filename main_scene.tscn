@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/directional_light.png" type="Texture" id=1]
 [ext_resource path="res://assets/1px_bg.png" type="Texture" id=2]
 [ext_resource path="res://map_gen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/sun.gd" type="Script" id=5]
 [ext_resource path="res://src/backdrop.gd" type="Script" id=6]
 [ext_resource path="res://src/camera_controller.gd" type="Script" id=7]
+[ext_resource path="res://scenes/units/scientist.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/temp.png" type="Texture" id=9]
+[ext_resource path="res://scenes/misc_terrain/laboratory.tscn" type="PackedScene" id=10]
 
 [node name="Main" type="Node"]
 
@@ -21,12 +25,10 @@ texture = ExtResource( 2 )
 centered = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="BG"]
-visible = false
 light_mask = 63
 color = Color( 0.0392157, 0.0352941, 0.0352941, 1 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 light_mask = 63
 color = Color( 0.0392157, 0.0352941, 0.0352941, 1 )
 
@@ -39,28 +41,64 @@ z_as_relative = false
 position = Vector2( 120.816, -139.693 )
 rotating = true
 current = true
-zoom = Vector2( 0.7, 0.7 )
+zoom = Vector2( 0.3, 0.3 )
 process_mode = 0
 script = ExtResource( 7 )
 look_ahead_smoothing = 0.527
 hard_boundary_width = 1000.0
 hard_boundary_height = 1000.0
-draw_debug = true
 look_ahead_gizmo_extants = 5.0
 
 [node name="player" parent="." instance=ExtResource( 4 )]
 light_mask = 2
-position = Vector2( 12.4867, -144.489 )
+position = Vector2( 16, -144 )
 
-[node name="Light2D" type="Light2D" parent="."]
+[node name="sun" type="Light2D" parent="."]
 visible = false
-position = Vector2( 314, 76 )
-scale = Vector2( 33.5735, 13.8624 )
+position = Vector2( 120, 76 )
+scale = Vector2( 16.011, 13.8624 )
 texture = ExtResource( 1 )
 range_layer_min = -512
 range_layer_max = 512
 range_item_cull_mask = 63
 shadow_color = Color( 0, 0, 0, 1 )
 shadow_item_cull_mask = 4
+script = ExtResource( 5 )
+
+[node name="scientist" parent="." instance=ExtResource( 8 )]
+position = Vector2( 71, -99 )
+frame = 2
+
+[node name="laboratory" parent="." instance=ExtResource( 10 )]
+position = Vector2( 48, -96 )
+
+[node name="Sprite4" type="Sprite" parent="laboratory"]
+light_mask = 4
+position = Vector2( -84, 50 )
+z_index = -18
+texture = ExtResource( 9 )
+offset = Vector2( 198, -3 )
+
+[node name="Sprite" type="Sprite" parent="laboratory"]
+light_mask = 4
+position = Vector2( -190, -75 )
+z_index = -18
+texture = ExtResource( 9 )
+offset = Vector2( 144, 120 )
+
+[node name="Sprite2" type="Sprite" parent="laboratory"]
+light_mask = 4
+position = Vector2( 472, 50 )
+scale = Vector2( -1, 1 )
+z_index = -18
+texture = ExtResource( 9 )
+offset = Vector2( 198, -3 )
+
+[node name="Sprite3" type="Sprite" parent="laboratory"]
+light_mask = 4
+position = Vector2( -404, 46 )
+z_index = -18
+texture = ExtResource( 9 )
+offset = Vector2( 198, -3 )
 
 [connection signal="ready" from="." to="camera" method="_on_parent_ready"]

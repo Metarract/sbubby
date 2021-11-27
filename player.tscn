@@ -181,7 +181,6 @@ __meta__ = {
 }
 
 [node name="headlamp" type="Light2D" parent="."]
-visible = false
 position = Vector2( 5, 0 )
 z_index = 100
 z_as_relative = false
