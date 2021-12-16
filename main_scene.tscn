@@ -41,7 +41,7 @@ z_as_relative = false
 position = Vector2( 120.816, -139.693 )
 rotating = true
 current = true
-zoom = Vector2( 0.3, 0.3 )
+zoom = Vector2( 0.5, 0.5 )
 process_mode = 0
 script = ExtResource( 7 )
 look_ahead_smoothing = 0.527
@@ -67,10 +67,10 @@ script = ExtResource( 5 )
 
 [node name="scientist" parent="." instance=ExtResource( 8 )]
 position = Vector2( 71, -99 )
-frame = 2
+frame = 5
 
 [node name="laboratory" parent="." instance=ExtResource( 10 )]
-position = Vector2( 48, -96 )
+position = Vector2( 54, -98 )
 
 [node name="Sprite4" type="Sprite" parent="laboratory"]
 light_mask = 4

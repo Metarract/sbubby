@@ -30,7 +30,6 @@ centered = false
 
 [node name="air_pump" parent="." instance=ExtResource( 2 )]
 position = Vector2( -8, -16 )
-frame = 2
 
 [node name="lamp" parent="." instance=ExtResource( 3 )]
 position = Vector2( -64, -32 )
